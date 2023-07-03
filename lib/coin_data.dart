@@ -27,9 +27,10 @@ const List<String> currenciesList = [
   'ZAR'
 ];
 
-const List<String> cryptoList = ['BTC', 'ETH', 'TRX', 'OP', 'ARB'];
+const List<String> cryptoList = ['BTC', 'ETH', 'TRX', 'XRP', 'DOT'];
 
 class CoinData {
+  bool isWaiting = true;
   Future<Map> getCoinData(String? currency) async {
     Map<String, String> cryptoPrices = {};
     for (String crypto in cryptoList) {
@@ -37,6 +38,7 @@ class CoinData {
           '/v1/exchangerate/$crypto/$currency', {'apikey': '$apiKey'});
       http.Response response = await http.get(uri);
       if (response.statusCode == 200) {
+        isWaiting = false;
         var data = jsonDecode(response.body);
         var price = data['rate'].toStringAsFixed(2);
         cryptoPrices[crypto] = price;

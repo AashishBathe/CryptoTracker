@@ -22,6 +22,7 @@ class _PriceScreenState extends State<PriceScreen> {
       menuItems.add(dropdownItem);
     }
     return DropdownButton<String>(
+      padding: EdgeInsets.all(10),
       value: selectedCurrency,
       items: menuItems,
       onChanged: (value) {
@@ -87,10 +88,10 @@ class _PriceScreenState extends State<PriceScreen> {
             ],
           ),
           Container(
-            height: 150.0,
+            height: 100.0,
             color: Colors.grey[800],
             alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
+            // padding: EdgeInsets.only(bottom: 30.0),
             child: Platform.isIOS ? iosPicker() : androidDropdown(),
           ),
         ],
@@ -111,18 +112,32 @@ class PriceWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
       child: Card(
-        elevation: 5.0,
+        elevation: 2.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-          child: Text(
-            '1 $cryptoName = $cryptoVal $selectedCurrency',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 28.0),
+          child: Center(
+            child: Row(
+              children: [
+                Image.network(
+                  'https://assets.coincap.io/assets/icons/${cryptoName.toLowerCase()}@2x.png',
+                  width: 30,
+                  height: 30,
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                Text(
+                  '1 $cryptoName = $cryptoVal $selectedCurrency',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
